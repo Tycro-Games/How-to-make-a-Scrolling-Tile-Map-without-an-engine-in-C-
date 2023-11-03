@@ -6,14 +6,25 @@
 #include "game.h"
 uint widthX, heightY;
 uint* tileArray;
+Surface* tilePalette = nullptr;
 // -----------------------------------------------------------
 // Initialize the application
 // -----------------------------------------------------------
 void Game::Init()
 {
 	// anything that happens only once at application start goes here
-	//load the file into tileArray
-	LoadCSVFile("assets/Tilemap.tsx");
+	//load pallete
+	tilePalette = new Surface("assets/BasicTilemap.png");
+	//load the tileArray
+
+	LoadCSVFile("assets/Tilemap.tmx");
+	//for (int i = 0; i < heightY; i++)
+	//{
+	//	for (int j = 0; j < widthX; j++)
+	//	{
+	//		tileArray[j + i * widthX]; //traversing a 1D array as it was a 2D one
+	//	}
+	//}
 }
 
 void Game::ConvertCharToInt(const char* pch, uint& numberForm)
@@ -79,4 +90,25 @@ void Game::LoadCSVFile(const char* csvPath)
 // -----------------------------------------------------------
 void Game::Tick(float /* deltaTime */)
 {
+	//makes screen black
+	screen->Clear(0);
+	//destination pixel
+	uint* dst = screen->pixels;
+
+	//source pixel
+	const uint* src = tilePalette->pixels;
+
+	const uint TILE_HEIGHT = 32;
+	const uint TILE_WIDTH = 32;
+	for (uint i = 0; i < TILE_HEIGHT; i++)
+	{
+		for (uint j = 0; j < TILE_WIDTH; j++)
+		{
+			dst[j] = src[j];
+		}
+		//these are also 1D arrays represented as 2D ones
+		//go to the next row in the dst and src
+		dst += screen->width;
+		src += tilePalette->width;
+	}
 }
