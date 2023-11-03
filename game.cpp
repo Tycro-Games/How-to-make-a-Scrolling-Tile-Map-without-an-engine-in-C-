@@ -12,7 +12,8 @@ uint* tileArray;
 void Game::Init()
 {
 	// anything that happens only once at application start goes here
-	LoadCSVFile("assets/")
+	//load the file into tileArray
+	LoadCSVFile("assets/Tilemap.tsx");
 }
 
 void Game::ConvertCharToInt(const char* pch, uint& numberForm)
