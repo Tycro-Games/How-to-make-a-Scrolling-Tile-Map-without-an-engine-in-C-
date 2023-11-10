@@ -14,6 +14,7 @@ namespace Tmpl8
 		void ConvertCharToInt(const char* pch, uint& numberForm);
 		void ExtractWidthHeight(const char* csvRaw, uint& w, uint& h);
 		void LoadCSVFile(const char* csvPath);
+		void RenderTile(const Surface* surface, int screenX, int screenY, uint sourceX, uint sourceY);
 		void Tick(float deltaTime) override;
 
 		void Shutdown() override
@@ -42,15 +43,11 @@ namespace Tmpl8
 			/* implement if you want to handle the mouse wheel */
 		}
 
-		void KeyUp(int) override
-		{
-			/* implement if you want to handle keys */
-		}
+		void KeyUp(int) override;
 
-		void KeyDown(int) override
-		{
-			/* implement if you want to handle keys */
-		}
+
+		void KeyDown(int) override;
+
 
 		// data members
 		int2 mousePos;
